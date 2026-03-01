@@ -1,0 +1,661 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "panels": [
+    {
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<div style=\"text-align:center; background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%); padding:16px; border-radius:8px;\"><h1 style=\"color:#72B7ED; font-size:1.9em; margin:0; letter-spacing:2px;\">🌤️ TIEMPO &amp; DEPORTE EN GALICIA</h1><p style=\"color:#90caf9; margin:6px 0 0 0; font-size:0.95em;\">Condiciones meteorológicas actuales para practicar deporte al aire libre</p></div>",
+        "mode": "html"
+      },
+      "pluginVersion": "13.0.0-22326976726.patch2",
+      "title": "",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "grafanacloud-infinity"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "#5794F2",
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 0,
+        "y": 3
+      },
+      "id": 3,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "Ciudad",
+          "limit": 1,
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "13.0.0-22326976726.patch2",
+      "targets": [
+        {
+          "app": "grafana-assistant-app",
+          "columns": [
+            {
+              "selector": "temperatura",
+              "text": "temperatura_aux",
+              "type": "number"
+            },
+            {
+              "selector": "ciudad",
+              "text": "Ciudad",
+              "type": "string"
+            }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "grafanacloud-infinity"
+          },
+          "format": "table",
+          "parser": "jq-backend",
+          "range": false,
+          "refId": "A",
+          "source": "url",
+          "type": "json",
+          "url": "https://clothbound-unturbulently-jed.ngrok-free.dev/api/galicia/deporte",
+          "url_options": {
+            "data": "",
+            "method": "GET",
+            "params": []
+          }
+        }
+      ],
+      "title": "📍 Ciudad",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "grafanacloud-infinity"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "red",
+                  "text": "❌  No Apto"
+                },
+                "1": {
+                  "color": "green",
+                  "text": "✅  ¡Apto!"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 6,
+        "y": 3
+      },
+      "id": 4,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Apto$/",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "13.0.0-22326976726.patch2",
+      "targets": [
+        {
+          "app": "grafana-assistant-app",
+          "columns": [
+            {
+              "selector": "apto",
+              "text": "Apto",
+              "type": "number"
+            },
+            {
+              "selector": "trigger_alerta",
+              "text": "Alerta",
+              "type": "number"
+            }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "grafanacloud-infinity"
+          },
+          "filters": [],
+          "format": "table",
+          "global_query_id": "",
+          "parser": "jq-backend",
+          "range": false,
+          "refId": "A",
+          "root_selector": "",
+          "source": "url",
+          "type": "json",
+          "url": "https://clothbound-unturbulently-jed.ngrok-free.dev/api/galicia/deporte",
+          "url_options": {
+            "data": "",
+            "method": "GET",
+            "params": []
+          }
+        }
+      ],
+      "title": "🏃 ¿Apto para Deporte?",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "grafanacloud-infinity"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "#73BF69",
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 12,
+        "y": 3
+      },
+      "id": 5,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "Recomendación",
+          "limit": 1,
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "13.0.0-22326976726.patch2",
+      "targets": [
+        {
+          "app": "grafana-assistant-app",
+          "columns": [
+            {
+              "selector": "apto",
+              "text": "apto_aux",
+              "type": "number"
+            },
+            {
+              "selector": "recomendacion",
+              "text": "Recomendación",
+              "type": "string"
+            }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "grafanacloud-infinity"
+          },
+          "format": "table",
+          "parser": "jq-backend",
+          "range": false,
+          "refId": "A",
+          "source": "url",
+          "type": "json",
+          "url": "https://clothbound-unturbulently-jed.ngrok-free.dev/api/galicia/deporte",
+          "url_options": {
+            "data": "",
+            "method": "GET",
+            "params": []
+          }
+        }
+      ],
+      "title": "💬 Recomendación",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "grafanacloud-infinity"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 40,
+          "min": -10,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#73BF69",
+                "value": 0
+              },
+              {
+                "color": "#FADE2A",
+                "value": 25
+              },
+              {
+                "color": "#FF5733",
+                "value": 35
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 8
+      },
+      "id": 8,
+      "options": {
+        "barShape": "flat",
+        "barWidthFactor": 0.5,
+        "effects": {
+          "barGlow": false,
+          "centerGlow": false,
+          "gradient": false
+        },
+        "endpointMarker": "point",
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "segmentCount": 1,
+        "segmentSpacing": 0.3,
+        "shape": "gauge",
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto",
+        "sparkline": false,
+        "textMode": "auto"
+      },
+      "pluginVersion": "13.0.0-22326976726.patch2",
+      "targets": [
+        {
+          "app": "grafana-assistant-app",
+          "columns": [
+            {
+              "selector": "temperatura",
+              "text": "Temperatura",
+              "type": "number"
+            }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "grafanacloud-infinity"
+          },
+          "format": "table",
+          "parser": "jq-backend",
+          "range": false,
+          "refId": "A",
+          "source": "url",
+          "type": "json",
+          "url": "https://clothbound-unturbulently-jed.ngrok-free.dev/api/galicia/deporte",
+          "url_options": {
+            "data": "",
+            "method": "GET",
+            "params": []
+          }
+        }
+      ],
+      "title": "🌡️ Temperatura",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "grafanacloud-infinity"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "yellow",
+                "value": 20
+              },
+              {
+                "color": "orange",
+                "value": 40
+              },
+              {
+                "color": "red",
+                "value": 60
+              }
+            ]
+          },
+          "unit": "velocitykmh"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 8
+      },
+      "id": 6,
+      "options": {
+        "barShape": "flat",
+        "barWidthFactor": 0.5,
+        "effects": {
+          "barGlow": false,
+          "centerGlow": false,
+          "gradient": false
+        },
+        "endpointMarker": "point",
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "segmentCount": 1,
+        "segmentSpacing": 0.3,
+        "shape": "gauge",
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto",
+        "sparkline": false,
+        "textMode": "auto"
+      },
+      "pluginVersion": "13.0.0-22326976726.patch2",
+      "targets": [
+        {
+          "app": "grafana-assistant-app",
+          "columns": [
+            {
+              "selector": "viento",
+              "text": "Viento",
+              "type": "number"
+            }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "grafanacloud-infinity"
+          },
+          "format": "table",
+          "parser": "jq-backend",
+          "range": false,
+          "refId": "A",
+          "source": "url",
+          "type": "json",
+          "url": "https://clothbound-unturbulently-jed.ngrok-free.dev/api/galicia/deporte",
+          "url_options": {
+            "data": "",
+            "method": "GET",
+            "params": []
+          }
+        }
+      ],
+      "title": "💨 Viento",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "grafanacloud-infinity"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 30,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "light-blue",
+                "value": 1
+              },
+              {
+                "color": "blue",
+                "value": 5
+              },
+              {
+                "color": "dark-blue",
+                "value": 15
+              }
+            ]
+          },
+          "unit": "lengthmm"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 8
+      },
+      "id": 7,
+      "options": {
+        "barShape": "flat",
+        "barWidthFactor": 0.5,
+        "effects": {
+          "barGlow": false,
+          "centerGlow": false,
+          "gradient": false
+        },
+        "endpointMarker": "point",
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "segmentCount": 1,
+        "segmentSpacing": 0.3,
+        "shape": "gauge",
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto",
+        "sparkline": false,
+        "textMode": "auto"
+      },
+      "pluginVersion": "13.0.0-22326976726.patch2",
+      "targets": [
+        {
+          "app": "grafana-assistant-app",
+          "columns": [
+            {
+              "selector": "lluvia",
+              "text": "Lluvia",
+              "type": "number"
+            }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "grafanacloud-infinity"
+          },
+          "format": "table",
+          "parser": "jq-backend",
+          "range": false,
+          "refId": "A",
+          "source": "url",
+          "type": "json",
+          "url": "https://clothbound-unturbulently-jed.ngrok-free.dev/api/galicia/deporte",
+          "url_options": {
+            "data": "",
+            "method": "GET",
+            "params": []
+          }
+        }
+      ],
+      "title": "🌧️ Lluvia",
+      "type": "gauge"
+    }
+  ],
+  "preload": false,
+  "schemaVersion": 42,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "TIEMPO & DEPORTE",
+  "uid": "junpzh7",
+  "version": 10,
+  "weekStart": ""
+}
