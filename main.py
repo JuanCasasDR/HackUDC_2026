@@ -7,7 +7,7 @@ LAT = 42.8805
 LON = -8.5457
 
 def evaluar_deporte(temp, lluvia, viento):
-    """Aquí mantenemos la lógica del primer código"""
+
     if lluvia > 0.1:
         return "No recomendado - Lluvia"
     if temp < 5:
