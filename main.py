@@ -10,7 +10,7 @@ def evaluar_deporte(temp, lluvia, viento):
     """Aquí mantenemos la lógica del primer código"""
     if lluvia > 0.1:
         return "No recomendado - Lluvia"
-    if temp < 1:
+    if temp < 5:
         return "No recomendado - Frío extremo"
     if temp > 30:
         return "No recomendado - Calor extremo"
